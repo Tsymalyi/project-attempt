@@ -9,6 +9,10 @@ export class HeroService  {
     return Promise.resolve(HEROES);
   } // stub
 
+  getHero(id: number): Promise<Hero> {
+    return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+  }
+
   getHeroesSlowly(): Promise<Hero[]> {
     return new Promise(resolve => {
       setTimeout(() => resolve(this.getHeroes()), 2000);
