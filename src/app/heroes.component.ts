@@ -56,6 +56,14 @@ import {HeroService} from './hero.servise';
     margin-right: .8em;
     border-radius: 4px 0 0 4px;
   }
+  
+  button.delete {
+  float:right;
+  margin-top: 2px;
+  margin-right: .8em;
+  background-color: gray !important;
+  color:white;
+}
 `],
   templateUrl: './heroes.component.html',
 })
@@ -75,6 +83,13 @@ export class HeroesComponent implements OnInit {
   getHeroes = function(): void {
     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   };
+
+  delete(hero: Hero): void {
+    this.heroes = this.heroes.filter(h => h != hero);
+    if (this.selectedHero == hero) {
+      this.selectedHero = null;
+    }
+  }
 
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedHero.id]);
